@@ -1,0 +1,33 @@
+---
+title: "ENVS 193 DS Homework 3"
+author: "Evelyn Tsang"
+date: "5/28/2025"
+format: docx
+---
+
+# Part 1. Set up tasks
+
+### Link to GitHub Repository: <https://github.com/ewtsang/ENVS-193DS_homework-03.git>
+
+## Packages and Data:
+
+```{r setup, message=FALSE}
+#loading in libraries
+library(tidyverse)
+library(here)
+library(gt)
+library(janitor)
+library(readxl)
+library(dplyr)
+
+```
+
+# Part 2. Problems
+
+## Problem 1. Personal Data
+
+### a. Data summarizing
+
+I could calculate the mean time spent on call to compare the average call times between the beginning of the quarter and towards the end, because I am more busy as the quarter progresses, so I think my calls will become shorter and less frequent.
+
+### b. Visualization
