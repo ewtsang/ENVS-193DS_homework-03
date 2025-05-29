@@ -65,6 +65,34 @@ theme_minimal() +
 
 **Figure 1.** Median family call lengths by week of Spring Quarter. This boxplot shows the distribution of call durations from Week 1 to Week 9. The median call length generally decreases from the beginning (Weeks 1-5) to the end (Weeks 6-9), which supports the hypothesis that call durations become shorter as academic demands increase over time.
 
+### d. Table presentation
+
+```{r}
+call_summary <- call_data_clean |> 
+  #creating new object "call_summary"
+group_by(week) |> 
+  #groups the data by "week" so that we can calculate statistics for each individual week of the spring quarter
+  summarize(median_call_length = round(median(call_length, na.rm = TRUE), 1)) |> 
+  #calculates the median call length for each week, rounding to one decimal point
+  #"na.rm = TRUE" ignores any missing values
+  arrange(week)
+#arranges rows in ascending order of week
+
+#display as a gt table
+call_summary |> 
+  gt() |> 
+  #converts the summary data frame into a gt table for nicer formatting
+  tab_header(title = "Median Family Call Length by Week",
+  #setting the title of the table
+    subtitle = "Table by Evelyn Tsang") |> 
+    #setting the subtitle of the table
+  cols_label (week = "Week",
+                #labeling columns of the table...
+    median_call_length = "Median Call Length (min)")
+    #relabeling "week" and "median_call_length" so there is correct capitalization and so there are units displayed
+```
+
+
 ## Problem 2. Affective visualization
 
 ### a. Describe in words what an affective visualization could look like for your personal data
