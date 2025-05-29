@@ -72,6 +72,7 @@ call_summary <- call_data_clean |>
   #creating new object "call_summary"
 group_by(week) |> 
   #groups the data by "week" so that we can calculate statistics for each individual week of the spring quarter
+  #groups the data by "week" so that we can calcualte statistics for each individual week of the spring quarter
   summarize(median_call_length = round(median(call_length, na.rm = TRUE), 1)) |> 
   #calculates the median call length for each week, rounding to one decimal point
   #"na.rm = TRUE" ignores any missing values
