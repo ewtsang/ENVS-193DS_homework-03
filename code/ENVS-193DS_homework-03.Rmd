@@ -19,6 +19,7 @@ library(gt)
 library(janitor)
 library(readxl)
 library(dplyr)
+library(ggplot2)
 
 ```
 
@@ -26,8 +27,99 @@ library(dplyr)
 
 ## Problem 1. Personal Data
 
+```{r}
+call_data <-read.csv(here("data", "Personal Data - Calls.csv"))
+#load in personal data
+```
+
 ### a. Data summarizing
 
-I could calculate the mean time spent on call to compare the average call times between the beginning of the quarter and towards the end, because I am more busy as the quarter progresses, so I think my calls will become shorter and less frequent.
+I could summarize my data to calculate the mean time spent on call to compare the average call times between the beginning of the quarter (Weeks 1-5) and towards the end (Weeks 6-10). Because I am more busy as the quarter progresses, I think my calls will become shorter and less frequent during the later half of the quarter.
 
 ### b. Visualization
+
+```{r}
+call_data_clean <-clean_names(call_data)
+#clean all column names so that they do not have any spaces or capitalization
+ggplot (data= call_data_clean,
+        #making a plot using call data
+        aes(x=week , y=call_length, fill=week) ) +
+        #setting the axis to compared week (x axis) and call length (y axis)
+  geom_boxplot() +
+  #create a boxplot for each week of spring quarter
+  geom_jitter(aes(color=week), 
+  #each individual point is sorted by family member 
+     width = 0.2, shape = 23, alpha = 0.5) +
+labs(title = "Mean Family Call Length vs Week of Spring Quarter", 
+     subtitle = "Plot by Evelyn Tsang", 
+     x = "Week of Spring Quarter", 
+     y = "Call Length (min)") +
+theme_minimal()
+#cleaning the aesthetics to be more minimal
+```
+
+### c. Caption
+
+**Figure 1.**
+
+## Problem 2. Affective visualization
+
+### a. Describe in words what an affective visualization could look like for your personal data
+(3-5 sentences)
+
+### b. Create a sketch of your idea
+(On paper)
+
+### c. Make a draft of your visualization
+Feel free to be creative with this! You do not have to do this in R. You could create a sculpture, painting, textile object, etc.
+
+If you are making your visualization in R, show the annotated code and the output.
+
+If you are making your visualization outside of R, include a photo of your visualization in your submission.
+
+### d. Write an artist statement
+An artist statement gives the audience context to understand your work. For each of the following points, write 1-2 sentences to address:
+
+the content of your piece (what are you showing?)
+the influences (what did techniques/artists/etc. did you find influential in creating your work?)
+the form of your work (written code, watercolor, oil painting, etc.)
+your process (how did you create your work?)
+
+## Problem 3.
+At this point, you have seen and created a lot of figures for this class. Revisit the paper you chose for your critique and your homework 2, where you described figures or tables in the text. Address the following in full sentences (3-4 sentences each).
+
+For this section of your homework, you will be evaluated on the logic, conciseness, and nuance of your critique.
+
+### Link to paper here: ______________
+
+### a. Revisit and summarize
+What are the statistical tests the authors are using to address their main research question? (Note: you have already written about this in homework 2! Find that text and provide it again here!)
+
+Insert the figure or table you described in Homework 2 here.
+
+### b. Visual clarity
+In 1-3 sentences, answer the question that best fits your paper.
+
+If you inserted a figure in Part a: How clearly did the authors visually represent their statistics in figures? For example, are the x- and y-axes in a logical position? Do they show summary statistics (means and SE, for example) and/or model predictions, and if so, do they show the underlying data?
+
+If you inserted a table in Part b: How clearly does the table represent the data underlying tests?
+
+If you have neither: Critique another figure or table in the text for visual clarity (and insert a screenshot of that figure/table in your submission).
+
+## c.Aesthetic clarity
+In 1-3 sentences, answer the question that best fits your paper.
+
+If you inserted a figure in Part a: How well did the authors handle “visual clutter”? How would you describe the the data:ink ratio?
+
+If you inserted a table in Part b: How well did the authors handle “visual clutter”? Is there any bolding/italic text to draw your eye to specific numbers?
+
+If you have neither: Critique another figure or table in the text for aesthetic clarity (and insert a screenshot of that figure/table in your submission).
+
+
+
+## d. Recommendations
+What recommendations would you make to make the figure or table better? What would you take out, add, or change? Provide explanations/justifications for each of your recommendations.
+
+Alternatively, if they did not represent their statistics in a figure, what kind of figure would you recommend to them? Describe the x- and y-axes, with any geometries and aesthetics (colors, etc.). Provide enough explanation such that someone would be able to create the figure you describe in code. Provide explanations/justifications for the figure you would recommend.
+
+
