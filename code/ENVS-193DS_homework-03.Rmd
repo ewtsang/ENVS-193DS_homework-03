@@ -119,12 +119,6 @@ grid::grid.raster(image)
 
 
 ### d. Write an artist statement
-An artist statement gives the audience context to understand your work. For each of the following points, write 1-2 sentences to address:
-
-the content of your piece (what are you showing?)
-the influences (what did techniques/artists/etc. did you find influential in creating your work?)
-the form of your work (written code, watercolor, oil painting, etc.)
-your process (how did you create your work?)
 
 Content:
 This piece visualizes the emotional arc of my family communication over the course of the quarter. Each week is represented through abstracted flowers.
@@ -139,27 +133,24 @@ Process:
 I began by summarizing my data and identifying trends in call length. I then translated those trends into symbolic forms—flowers of different sizes, or violins with layered color—and used either physical media or gentle ggplot customizations to express how my stress and availability change over time.
 
 ## Problem 3.
-At this point, you have seen and created a lot of figures for this class. Revisit the paper you chose for your critique and your homework 2, where you described figures or tables in the text. Address the following in full sentences (3-4 sentences each).
-
-For this section of your homework, you will be evaluated on the logic, conciseness, and nuance of your critique.
 
 ### Link to paper here: https://www.sciencedirect.com/science/article/pii/S0269749117341234?via%3Dihub
 
 ### a. Revisit and summarize
-What are the statistical tests the authors are using to address their main research question? (Note: you have already written about this in homework 2! Find that text and provide it again here!)
+The statistical tests the authors are using to address their main research question would be a one-way analysis of variance (ANOVA) and a Pearson test was performed to test the normality of data. Statistical difference was set at α=0.05.
 
-Insert the figure or table you described in Homework 2 here.
+Figure/table described in Homework 2 here.
+```{r}
+image<- image_read("/Users/ewtsa/Documents/ENVS-193DS/GitHub/ENVS-193DS_homework-03/Ziajahromi.jpg")
+grid::grid.raster(image)
+```
+
 
 ### b. Visual clarity
-In 1-3 sentences, answer the question that best fits your paper.
 
-If you inserted a figure in Part a: How clearly did the authors visually represent their statistics in figures? For example, are the x- and y-axes in a logical position? Do they show summary statistics (means and SE, for example) and/or model predictions, and if so, do they show the underlying data?
+Ziajahromi et. al. represents the data using box plots and scatterplots with means and standard errors. The x and y axis are appropriately labeled, and the sale is logical. Panel A shows summary statistics (median, quartiles, range) as well as individual outliers, while panel B overlays the collected raw data points with error bars, enhancing the distribution.
 
-If you inserted a table in Part b: How clearly does the table represent the data underlying tests?
-
-If you have neither: Critique another figure or table in the text for visual clarity (and insert a screenshot of that figure/table in your submission).
-
-## c.Aesthetic clarity
+## c. Aesthetic clarity
 In 1-3 sentences, answer the question that best fits your paper.
 
 If you inserted a figure in Part a: How well did the authors handle “visual clutter”? How would you describe the the data:ink ratio?
