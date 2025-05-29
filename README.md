@@ -26,5 +26,5 @@ File structure:
 All code is in the `code` folder. The code runs models, generates model predictions, and visualizes data.
 
 ## Rendered output
-
+https://ewtsang.github.io/ENVS-193DS_homework-03/
 You will need to find the rendered output to your own .html in your forked version of the repository! Insert that link here.
