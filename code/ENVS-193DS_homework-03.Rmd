@@ -3,10 +3,10 @@ title: "ENVS 193 DS Homework 3"
 author: "Evelyn Tsang"
 date: "5/28/2025"
 format: html
+  html: 
+    toc: true
+    toc_float: true
 ---
-**GitHub basics on class website HTML**
-
-
 # Part 1. Set up tasks
 
 ### Link to GitHub Repository: <https://github.com/ewtsang/ENVS-193DS_homework-03.git>
