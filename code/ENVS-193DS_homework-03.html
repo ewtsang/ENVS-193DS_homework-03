@@ -126,7 +126,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magick)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -184,41 +185,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">#creating new object "call_summary"</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(week) <span class="sc">|&gt;</span> </span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">#groups the data by "week" so that we can calculate statistics for each individual week of the spring quarter</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">median_call_length =</span> <span class="fu">round</span>(<span class="fu">median</span>(call_length, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="dv">1</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">#calculates the median call length for each week, rounding to one decimal point</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#"na.rm = TRUE" ignores any missing values</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(week)</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#arranges rows in ascending order of week</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">#display as a gt table</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>call_summary <span class="sc">|&gt;</span> </span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">#converts the summary data frame into a gt table for nicer formatting</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="st">"Median Family Call Length by Week"</span>,</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="co">#setting the title of the table</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Table by Evelyn Tsang"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">#setting the subtitle of the table</span></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span> (<span class="at">week =</span> <span class="st">"Week"</span>,</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>                <span class="co">#labeling columns of the table...</span></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_call_length =</span> <span class="st">"Median Call Length (min)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">#groups the data by "week" so that we can calcualte statistics for each individual week of the spring quarter</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">median_call_length =</span> <span class="fu">round</span>(<span class="fu">median</span>(call_length, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="dv">1</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#calculates the median call length for each week, rounding to one decimal point</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">#"na.rm = TRUE" ignores any missing values</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(week)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">#arranges rows in ascending order of week</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">#display as a gt table</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>call_summary <span class="sc">|&gt;</span> </span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="co">#converts the summary data frame into a gt table for nicer formatting</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="st">"Median Family Call Length by Week"</span>,</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="co">#setting the title of the table</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Table by Evelyn Tsang"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    <span class="co">#setting the subtitle of the table</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span> (<span class="at">week =</span> <span class="st">"Week"</span>,</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>                <span class="co">#labeling columns of the table...</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_call_length =</span> <span class="st">"Median Call Length (min)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="czhamopqzl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#czhamopqzl table {
+<div id="kekyqiiyod" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#kekyqiiyod table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#czhamopqzl thead, #czhamopqzl tbody, #czhamopqzl tfoot, #czhamopqzl tr, #czhamopqzl td, #czhamopqzl th {
+#kekyqiiyod thead, #kekyqiiyod tbody, #kekyqiiyod tfoot, #kekyqiiyod tr, #kekyqiiyod td, #kekyqiiyod th {
   border-style: none;
 }
 
-#czhamopqzl p {
+#kekyqiiyod p {
   margin: 0;
   padding: 0;
 }
 
-#czhamopqzl .gt_table {
+#kekyqiiyod .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -244,12 +246,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#czhamopqzl .gt_caption {
+#kekyqiiyod .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#czhamopqzl .gt_title {
+#kekyqiiyod .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -261,7 +263,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#czhamopqzl .gt_subtitle {
+#kekyqiiyod .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -273,7 +275,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#czhamopqzl .gt_heading {
+#kekyqiiyod .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -285,13 +287,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#czhamopqzl .gt_bottom_border {
+#kekyqiiyod .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#czhamopqzl .gt_col_headings {
+#kekyqiiyod .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -306,7 +308,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#czhamopqzl .gt_col_heading {
+#kekyqiiyod .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -326,7 +328,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#czhamopqzl .gt_column_spanner_outer {
+#kekyqiiyod .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -338,15 +340,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#czhamopqzl .gt_column_spanner_outer:first-child {
+#kekyqiiyod .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#czhamopqzl .gt_column_spanner_outer:last-child {
+#kekyqiiyod .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#czhamopqzl .gt_column_spanner {
+#kekyqiiyod .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -358,11 +360,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#czhamopqzl .gt_spanner_row {
+#kekyqiiyod .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#czhamopqzl .gt_group_heading {
+#kekyqiiyod .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -388,7 +390,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#czhamopqzl .gt_empty_group_heading {
+#kekyqiiyod .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -403,15 +405,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#czhamopqzl .gt_from_md > :first-child {
+#kekyqiiyod .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#czhamopqzl .gt_from_md > :last-child {
+#kekyqiiyod .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#czhamopqzl .gt_row {
+#kekyqiiyod .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -430,7 +432,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#czhamopqzl .gt_stub {
+#kekyqiiyod .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -443,7 +445,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#czhamopqzl .gt_stub_row_group {
+#kekyqiiyod .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -457,15 +459,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#czhamopqzl .gt_row_group_first td {
+#kekyqiiyod .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#czhamopqzl .gt_row_group_first th {
+#kekyqiiyod .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#czhamopqzl .gt_summary_row {
+#kekyqiiyod .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -475,16 +477,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#czhamopqzl .gt_first_summary_row {
+#kekyqiiyod .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#czhamopqzl .gt_first_summary_row.thick {
+#kekyqiiyod .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#czhamopqzl .gt_last_summary_row {
+#kekyqiiyod .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -494,7 +496,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#czhamopqzl .gt_grand_summary_row {
+#kekyqiiyod .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -504,7 +506,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#czhamopqzl .gt_first_grand_summary_row {
+#kekyqiiyod .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -514,7 +516,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#czhamopqzl .gt_last_grand_summary_row_top {
+#kekyqiiyod .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -524,11 +526,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#czhamopqzl .gt_striped {
+#kekyqiiyod .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#czhamopqzl .gt_table_body {
+#kekyqiiyod .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -537,7 +539,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#czhamopqzl .gt_footnotes {
+#kekyqiiyod .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -551,7 +553,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#czhamopqzl .gt_footnote {
+#kekyqiiyod .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -560,7 +562,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#czhamopqzl .gt_sourcenotes {
+#kekyqiiyod .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -574,7 +576,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#czhamopqzl .gt_sourcenote {
+#kekyqiiyod .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -582,72 +584,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#czhamopqzl .gt_left {
+#kekyqiiyod .gt_left {
   text-align: left;
 }
 
-#czhamopqzl .gt_center {
+#kekyqiiyod .gt_center {
   text-align: center;
 }
 
-#czhamopqzl .gt_right {
+#kekyqiiyod .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#czhamopqzl .gt_font_normal {
+#kekyqiiyod .gt_font_normal {
   font-weight: normal;
 }
 
-#czhamopqzl .gt_font_bold {
+#kekyqiiyod .gt_font_bold {
   font-weight: bold;
 }
 
-#czhamopqzl .gt_font_italic {
+#kekyqiiyod .gt_font_italic {
   font-style: italic;
 }
 
-#czhamopqzl .gt_super {
+#kekyqiiyod .gt_super {
   font-size: 65%;
 }
 
-#czhamopqzl .gt_footnote_marks {
+#kekyqiiyod .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#czhamopqzl .gt_asterisk {
+#kekyqiiyod .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#czhamopqzl .gt_indent_1 {
+#kekyqiiyod .gt_indent_1 {
   text-indent: 5px;
 }
 
-#czhamopqzl .gt_indent_2 {
+#kekyqiiyod .gt_indent_2 {
   text-indent: 10px;
 }
 
-#czhamopqzl .gt_indent_3 {
+#kekyqiiyod .gt_indent_3 {
   text-indent: 15px;
 }
 
-#czhamopqzl .gt_indent_4 {
+#kekyqiiyod .gt_indent_4 {
   text-indent: 20px;
 }
 
-#czhamopqzl .gt_indent_5 {
+#kekyqiiyod .gt_indent_5 {
   text-indent: 25px;
 }
 
-#czhamopqzl .katex-display {
+#kekyqiiyod .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#czhamopqzl div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#kekyqiiyod div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -716,25 +718,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="a.-describe-in-words-what-an-affective-visualization-could-look-like-for-your-personal-data" class="level3">
 <h3 class="anchored" data-anchor-id="a.-describe-in-words-what-an-affective-visualization-could-look-like-for-your-personal-data">a. Describe in words what an affective visualization could look like for your personal data</h3>
 <p>(3-5 sentences)</p>
-<p>An affective visualization of my personal call data could take the form of a watercolor painting where each week of the quarter is represented by a flower. The size of the flower’s bloom could correspond to the median length of my calls that week—larger blooms representing longer, more relaxed conversations, and smaller, tight buds representing shorter, more rushed calls. The colors could transition from calm blues and greens at the start of the quarter to warm reds and oranges as my schedule becomes more stressful and busy. This visual metaphor would evoke how my emotional and academic state affects my communication with family. It centers the personal, emotional rhythms of time and relationships over pure statistical accuracy.</p>
+<p>An affective visualization of my personal call data could take the form of a digital painting where each week of the quarter is represented by a flower. The size of the flower’s bloom could correspond to the median length of my calls that week—larger blooms representing longer, more relaxed conversations, and smaller, tight buds representing shorter, more rushed calls. The colors could transition from calm blues and greens at the start of the quarter to warm reds and oranges as my schedule becomes more stressful and busy. This visual metaphor would evoke how my emotional and academic state affects my communication with family. It centers the personal, emotional rhythms of time and relationships over pure statistical accuracy.</p>
 </section>
 <section id="b.-create-a-sketch-of-your-idea" class="level3">
 <h3 class="anchored" data-anchor-id="b.-create-a-sketch-of-your-idea">b. Create a sketch of your idea</h3>
-<p>(On paper)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>image<span class="ot">&lt;-</span> <span class="fu">image_read</span>(<span class="st">"/Users/ewtsa/Documents/ENVS-193DS/GitHub/ENVS-193DS_homework-03/HW3Paper.jpg"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>grid<span class="sc">::</span><span class="fu">grid.raster</span>(image)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ENVS-193DS_homework-03_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="c.-make-a-draft-of-your-visualization" class="level3">
 <h3 class="anchored" data-anchor-id="c.-make-a-draft-of-your-visualization">c.&nbsp;Make a draft of your visualization</h3>
-<p>Feel free to be creative with this! You do not have to do this in R. You could create a sculpture, painting, textile object, etc.</p>
-<p>If you are making your visualization in R, show the annotated code and the output.</p>
-<p>If you are making your visualization outside of R, include a photo of your visualization in your submission.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>image<span class="ot">&lt;-</span> <span class="fu">image_read</span>(<span class="st">"/Users/ewtsa/Documents/ENVS-193DS/GitHub/ENVS-193DS_homework-03/HW3Draft.jpg"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>grid<span class="sc">::</span><span class="fu">grid.raster</span>(image)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ENVS-193DS_homework-03_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="d.-write-an-artist-statement" class="level3">
 <h3 class="anchored" data-anchor-id="d.-write-an-artist-statement">d.&nbsp;Write an artist statement</h3>
 <p>An artist statement gives the audience context to understand your work. For each of the following points, write 1-2 sentences to address:</p>
 <p>the content of your piece (what are you showing?) the influences (what did techniques/artists/etc. did you find influential in creating your work?) the form of your work (written code, watercolor, oil painting, etc.) your process (how did you create your work?)</p>
-<p>Content: This piece visualizes the emotional arc of my family communication over the course of the quarter. Each week is represented through abstracted visual forms—either drawn as flowers or shaped via soft, organic plots—to communicate the rhythm and length of our conversations.</p>
+<p>Content: This piece visualizes the emotional arc of my family communication over the course of the quarter. Each week is represented through abstracted flowers.</p>
 <p>Influences: I was influenced by Jill Pelto’s blending of science and art, as well as the Dear Data project, which turns personal data into expressive and thoughtful visual stories. These artists inspired me to move beyond numeric precision and lean into emotional storytelling.</p>
-<p>Form: My visualization takes the form of a watercolor painting (or: a stylized violin-jitter plot in R with pastel colors and symbolic shapes). It emphasizes aesthetics and emotional tone over analytical precision.</p>
+<p>Form: My visualization takes the form of a colorful digital drawing. It emphasizes aesthetics and emotional tone over analytical precision.</p>
 <p>Process: I began by summarizing my data and identifying trends in call length. I then translated those trends into symbolic forms—flowers of different sizes, or violins with layered color—and used either physical media or gentle ggplot customizations to express how my stress and availability change over time.</p>
 </section>
 </section>

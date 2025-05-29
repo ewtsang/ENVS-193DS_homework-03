@@ -22,6 +22,7 @@ library(janitor)
 library(readxl)
 library(dplyr)
 library(ggplot2)
+library(magick)
 ```
 
 # Part 2. Problems
@@ -99,17 +100,23 @@ call_summary |>
 ### a. Describe in words what an affective visualization could look like for your personal data
 (3-5 sentences)
 
-An affective visualization of my personal call data could take the form of a watercolor painting where each week of the quarter is represented by a flower. The size of the flower's bloom could correspond to the median length of my calls that week—larger blooms representing longer, more relaxed conversations, and smaller, tight buds representing shorter, more rushed calls. The colors could transition from calm blues and greens at the start of the quarter to warm reds and oranges as my schedule becomes more stressful and busy. This visual metaphor would evoke how my emotional and academic state affects my communication with family. It centers the personal, emotional rhythms of time and relationships over pure statistical accuracy.
+An affective visualization of my personal call data could take the form of a digital painting where each week of the quarter is represented by a flower. The size of the flower's bloom could correspond to the median length of my calls that week—larger blooms representing longer, more relaxed conversations, and smaller, tight buds representing shorter, more rushed calls. The colors could transition from calm blues and greens at the start of the quarter to warm reds and oranges as my schedule becomes more stressful and busy. This visual metaphor would evoke how my emotional and academic state affects my communication with family. It centers the personal, emotional rhythms of time and relationships over pure statistical accuracy.
 
 ### b. Create a sketch of your idea
-(On paper)
+
+```{r}
+image<- image_read("/Users/ewtsa/Documents/ENVS-193DS/GitHub/ENVS-193DS_homework-03/HW3Paper.jpg")
+grid::grid.raster(image)
+```
+
 
 ### c. Make a draft of your visualization
-Feel free to be creative with this! You do not have to do this in R. You could create a sculpture, painting, textile object, etc.
 
-If you are making your visualization in R, show the annotated code and the output.
+```{r}
+image<- image_read("/Users/ewtsa/Documents/ENVS-193DS/GitHub/ENVS-193DS_homework-03/HW3Draft.jpg")
+grid::grid.raster(image)
+```
 
-If you are making your visualization outside of R, include a photo of your visualization in your submission.
 
 ### d. Write an artist statement
 An artist statement gives the audience context to understand your work. For each of the following points, write 1-2 sentences to address:
@@ -120,13 +127,13 @@ the form of your work (written code, watercolor, oil painting, etc.)
 your process (how did you create your work?)
 
 Content:
-This piece visualizes the emotional arc of my family communication over the course of the quarter. Each week is represented through abstracted visual forms—either drawn as flowers or shaped via soft, organic plots—to communicate the rhythm and length of our conversations.
+This piece visualizes the emotional arc of my family communication over the course of the quarter. Each week is represented through abstracted flowers.
 
 Influences:
 I was influenced by Jill Pelto’s blending of science and art, as well as the Dear Data project, which turns personal data into expressive and thoughtful visual stories. These artists inspired me to move beyond numeric precision and lean into emotional storytelling.
 
 Form:
-My visualization takes the form of a watercolor painting (or: a stylized violin-jitter plot in R with pastel colors and symbolic shapes). It emphasizes aesthetics and emotional tone over analytical precision.
+My visualization takes the form of a colorful digital drawing. It emphasizes aesthetics and emotional tone over analytical precision.
 
 Process:
 I began by summarizing my data and identifying trends in call length. I then translated those trends into symbolic forms—flowers of different sizes, or violins with layered color—and used either physical media or gentle ggplot customizations to express how my stress and availability change over time.
@@ -136,7 +143,7 @@ At this point, you have seen and created a lot of figures for this class. Revisi
 
 For this section of your homework, you will be evaluated on the logic, conciseness, and nuance of your critique.
 
-### Link to paper here: ______________
+### Link to paper here: https://www.sciencedirect.com/science/article/pii/S0269749117341234?via%3Dihub
 
 ### a. Revisit and summarize
 What are the statistical tests the authors are using to address their main research question? (Note: you have already written about this in homework 2! Find that text and provide it again here!)
