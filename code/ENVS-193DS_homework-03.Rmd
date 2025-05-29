@@ -109,14 +109,12 @@ image<- image_read("/Users/ewtsa/Documents/ENVS-193DS/GitHub/ENVS-193DS_homework
 grid::grid.raster(image)
 ```
 
-
 ### c. Make a draft of your visualization
 
 ```{r}
 image<- image_read("/Users/ewtsa/Documents/ENVS-193DS/GitHub/ENVS-193DS_homework-03/HW3Draft.jpg")
 grid::grid.raster(image)
 ```
-
 
 ### d. Write an artist statement
 
@@ -145,7 +143,6 @@ image<- image_read("/Users/ewtsa/Documents/ENVS-193DS/GitHub/ENVS-193DS_homework
 grid::grid.raster(image)
 ```
 
-
 ### b. Visual clarity
 
 Ziajahromi et. al. represents the data using box plots and scatterplots with means and standard errors. The x and y axis are appropriately labeled, and the sale is logical. Panel A shows summary statistics (median, quartiles, range) as well as individual outliers, while panel B overlays the collected raw data points with error bars, enhancing the distribution.
@@ -154,6 +151,7 @@ Ziajahromi et. al. represents the data using box plots and scatterplots with mea
  The figures are clean and not visually cluttered, there are not any unnecessary design elements, and each component contributes to data interpretation. The use of different shapes in panel B helps distinguish treatment groups without having to rely on color, improving accessibility of the research.
 
 ## d. Recommendations
-What recommendations would you make to make the figure or table better? What would you take out, add, or change? Provide explanations/justifications for each of your recommendations.
-
-Alternatively, if they did not represent their statistics in a figure, what kind of figure would you recommend to them? Describe the x- and y-axes, with any geometries and aesthetics (colors, etc.). Provide enough explanation such that someone would be able to create the figure you describe in code. Provide explanations/justifications for the figure you would recommend.
+1. I would recommend for panel A adding subtle shading to distinguish treatment groups to improve the visual segmentation
+2. For both, I would add a header
+3. For both, adding in color, while still maintaining the variance in values so that if it were printed black and white, it could still be discernable.
+4. For both, possibly adding grid lines
