@@ -4,6 +4,8 @@ author: "Evelyn Tsang"
 date: "5/28/2025"
 format: docx
 ---
+**GitHub basics on class website HTML**
+
 
 # Part 1. Set up tasks
 
@@ -20,7 +22,6 @@ library(janitor)
 library(readxl)
 library(dplyr)
 library(ggplot2)
-
 ```
 
 # Part 2. Problems
@@ -34,7 +35,7 @@ call_data <-read.csv(here("data", "Personal Data - Calls.csv"))
 
 ### a. Data summarizing
 
-I could summarize my data to calculate the mean time spent on call to compare the average call times between the beginning of the quarter (Weeks 1-5) and towards the end (Weeks 6-10). Because I am more busy as the quarter progresses, I think my calls will become shorter and less frequent during the later half of the quarter.
+I could summarize my data to calculate the mean time spent on call to compare the median call times between the beginning of the quarter (Weeks 1-5) and towards the end (Weeks 6-10). Because I am more busy as the quarter progresses, I think my calls will become shorter during the later half of the quarter.
 
 ### b. Visualization
 
@@ -47,20 +48,22 @@ ggplot (data= call_data_clean,
         #setting the axis to compared week (x axis) and call length (y axis)
   geom_boxplot() +
   #create a boxplot for each week of spring quarter
-  geom_jitter(aes(color=week), 
+  geom_jitter(aes(), 
   #each individual point is sorted by family member 
-     width = 0.2, shape = 23, alpha = 0.5) +
-labs(title = "Mean Family Call Length vs Week of Spring Quarter", 
+     width = 0.1, shape = 21, alpha = 0.5) +
+labs(title = "Family Call Length vs Week of Spring Quarter", 
      subtitle = "Plot by Evelyn Tsang", 
      x = "Week of Spring Quarter", 
      y = "Call Length (min)") +
-theme_minimal()
-#cleaning the aesthetics to be more minimal
+theme_minimal() + 
+  scale_fill_brewer(palette = "Set3") +
+  scale_color_brewer(palette = "Set3")
+#cleaning the aesthetics to be more minimal, and using scale fill/color manual to change 
 ```
 
 ### c. Caption
 
-**Figure 1.**
+**Figure 1.** Median family call lengths by week of Spring Quarter. This boxplot shows the distribution of call durations from Week 1 to Week 9. The median call length generally decreases from the beginning (Weeks 1-5) to the end (Weeks 6-9), which supports the hypothesis that call durations become shorter as academic demands increase over time.
 
 ## Problem 2. Affective visualization
 
@@ -115,11 +118,7 @@ If you inserted a table in Part b: How well did the authors handle “visual clu
 
 If you have neither: Critique another figure or table in the text for aesthetic clarity (and insert a screenshot of that figure/table in your submission).
 
-
-
 ## d. Recommendations
 What recommendations would you make to make the figure or table better? What would you take out, add, or change? Provide explanations/justifications for each of your recommendations.
 
 Alternatively, if they did not represent their statistics in a figure, what kind of figure would you recommend to them? Describe the x- and y-axes, with any geometries and aesthetics (colors, etc.). Provide enough explanation such that someone would be able to create the figure you describe in code. Provide explanations/justifications for the figure you would recommend.
-
-
