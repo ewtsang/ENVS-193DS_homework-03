@@ -2,7 +2,7 @@
 title: "ENVS 193 DS Homework 3"
 author: "Evelyn Tsang"
 date: "5/28/2025"
-format: docx
+format: html
 ---
 **GitHub basics on class website HTML**
 
@@ -98,6 +98,8 @@ call_summary |>
 ### a. Describe in words what an affective visualization could look like for your personal data
 (3-5 sentences)
 
+An affective visualization of my personal call data could take the form of a watercolor painting where each week of the quarter is represented by a flower. The size of the flower's bloom could correspond to the median length of my calls that week—larger blooms representing longer, more relaxed conversations, and smaller, tight buds representing shorter, more rushed calls. The colors could transition from calm blues and greens at the start of the quarter to warm reds and oranges as my schedule becomes more stressful and busy. This visual metaphor would evoke how my emotional and academic state affects my communication with family. It centers the personal, emotional rhythms of time and relationships over pure statistical accuracy.
+
 ### b. Create a sketch of your idea
 (On paper)
 
@@ -115,6 +117,18 @@ the content of your piece (what are you showing?)
 the influences (what did techniques/artists/etc. did you find influential in creating your work?)
 the form of your work (written code, watercolor, oil painting, etc.)
 your process (how did you create your work?)
+
+Content:
+This piece visualizes the emotional arc of my family communication over the course of the quarter. Each week is represented through abstracted visual forms—either drawn as flowers or shaped via soft, organic plots—to communicate the rhythm and length of our conversations.
+
+Influences:
+I was influenced by Jill Pelto’s blending of science and art, as well as the Dear Data project, which turns personal data into expressive and thoughtful visual stories. These artists inspired me to move beyond numeric precision and lean into emotional storytelling.
+
+Form:
+My visualization takes the form of a watercolor painting (or: a stylized violin-jitter plot in R with pastel colors and symbolic shapes). It emphasizes aesthetics and emotional tone over analytical precision.
+
+Process:
+I began by summarizing my data and identifying trends in call length. I then translated those trends into symbolic forms—flowers of different sizes, or violins with layered color—and used either physical media or gentle ggplot customizations to express how my stress and availability change over time.
 
 ## Problem 3.
 At this point, you have seen and created a lot of figures for this class. Revisit the paper you chose for your critique and your homework 2, where you described figures or tables in the text. Address the following in full sentences (3-4 sentences each).
