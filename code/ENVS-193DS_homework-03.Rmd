@@ -2,7 +2,7 @@
 title: "ENVS 193 DS Homework 3"
 author: "Evelyn Tsang"
 date: "5/28/2025"
-format: html
+format: 
   html: 
     toc: true
     toc_float: true
